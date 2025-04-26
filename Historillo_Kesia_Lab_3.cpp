@@ -48,21 +48,37 @@ void convertToPostfix(string input){
     for(int i = 0; i < input.length(); i++){
         if (isdigit(input[i])){
             output += input[i];
+
         }else{
-            if (top == -1 || input[i] == '('){
+            if(top == -1){
                 push(input[i]);
-            }else if (input[i] == ')') {
-                while (top >= 0 && peek() != '('){
-                    output += pop();
-                }
-                pop();   
             }else{
-                while (top >= 0 && checkLevel(peek()) <= checkLevel(input[i])){
-                    output += pop();
-                }
+                if(input[i] == '('|| peek() == '(')}
                 push(input[i]);
-            }
-        }
+
+                }else{
+                   if(input[i] == ')'){ 
+
+                       while (top >= 0 && peek() != '('){
+                           output += pop();
+                        }
+
+                       if(top >= 0 && peek() != '('){
+                           pop();
+                        }
+                    }else{
+
+                        while(checkLevel (peek()) <= checkLevel(input[i])){
+                             output += pop();
+                       }
+                       
+                       push(input[i]);
+                    }
+                }
+            } 
+    
+    
+}
 
         cout << "| " << input[i] << "      | " << stackOutput << "   | " << output << "     |" << endl;
         cout << "|-------------------------|" << endl;
